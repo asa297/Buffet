@@ -15,7 +15,7 @@ if (isset($_POST['type'])) {
 
     $type = $_POST['type'];
 		
-        $result = $db->getDetail_buffet_type($type);	
+        $result = $db->getDetail_price_type($type);	
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
 		
 } else {

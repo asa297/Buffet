@@ -113,10 +113,51 @@ class DB_Functions {
 
 }
 
-	public function getbuffet($type_id){
+	public function getDetail_buffet_type($type_id){
 		
-	$sql= "SELECT p.title , p.rating , p.image , tb.type_id , tb.type_name FROM promotion p , type_buffet tb WHERE p.type_id = tb.type_id AND p.type_id = $type_id ORDER BY p.pro_id DESC ";
+	$sql= "SELECT title , rating ,image FROM promotion WHERE type_buffet = $type_id";
+	$result = mysqli_query( $this->conn ,$sql);
+	if(mysqli_num_rows($result)){
+		
+		while ($row = mysqli_fetch_assoc($result)) {
+		
+		$array[] = $row;
+		
+	}
+	return $array;
+	}
+	else{
+		return ;
+	}
 
+	
+	}
+	
+	public function getDetail_price_type($type_id){
+		
+	$sql= "SELECT title , rating ,image FROM promotion WHERE type_price = $type_id";
+	$result = mysqli_query( $this->conn ,$sql);
+	if(mysqli_num_rows($result)){
+		
+		while ($row = mysqli_fetch_assoc($result)) {
+		
+		$array[] = $row;
+		
+	}
+	return $array;
+	}
+	else{
+		return ;
+	}
+
+	
+	
+	}
+	
+	
+	public function getbuffet_type(){
+		
+	$sql= "SELECT * FROM `type_buffet`";
 	$result = mysqli_query( $this->conn ,$sql);
 	
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -127,7 +168,20 @@ class DB_Functions {
 	}
 	return $array;
 	
+	}
 	
+	public function getprice_type(){
+		
+	$sql= "SELECT * FROM `type_price`";
+	$result = mysqli_query( $this->conn ,$sql);
+	
+	while ($row = mysqli_fetch_assoc($result)) {
+		
+		$array[] = $row;
+	
+		
+	}
+	return $array;
 	
 	}
 }
