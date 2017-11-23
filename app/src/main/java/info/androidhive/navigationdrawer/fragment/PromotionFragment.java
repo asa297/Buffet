@@ -37,6 +37,7 @@ import info.androidhive.navigationdrawer.promotion.MoviesAdapter;
 
 import static info.androidhive.navigationdrawer.app.AppConfig.URL_BUFFET_TYPE;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -114,7 +115,7 @@ public class PromotionFragment extends Fragment {
         // Inflate the layout for this fragment
 
         movies = new ArrayList<>();
-        
+
         gridLayout = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(gridLayout);
 
@@ -147,7 +148,7 @@ public class PromotionFragment extends Fragment {
                     });
                 }
                 if(click == 1){
-                    getdata_spinner_value(URL_BUFFET_TYPE);
+                    getdata_spinner_value(AppConfig.URL_BUFFET_TYPE);
                     spin_value.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
