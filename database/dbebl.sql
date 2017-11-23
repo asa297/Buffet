@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2017 at 05:54 PM
+-- Generation Time: Nov 23, 2017 at 07:45 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.24
 
@@ -2246,15 +2246,15 @@ INSERT INTO `type_buffet` (`type_id`, `type_name`) VALUES
 --
 
 CREATE TABLE `type_price` (
-  `id` int(10) NOT NULL,
-  `price` varchar(20) NOT NULL
+  `tpye_id` int(10) NOT NULL,
+  `type_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `type_price`
 --
 
-INSERT INTO `type_price` (`id`, `price`) VALUES
+INSERT INTO `type_price` (`tpye_id`, `type_name`) VALUES
 (1, '100-199'),
 (2, '200-299'),
 (3, '300-399'),
@@ -2327,7 +2327,7 @@ ALTER TABLE `type_buffet`
 -- Indexes for table `type_price`
 --
 ALTER TABLE `type_price`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`tpye_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -2391,7 +2391,7 @@ ALTER TABLE `type_buffet`
 -- AUTO_INCREMENT for table `type_price`
 --
 ALTER TABLE `type_price`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `tpye_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 DELIMITER $$
 --
