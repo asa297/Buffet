@@ -1,6 +1,7 @@
 package info.androidhive.navigationdrawer.promotion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import info.androidhive.navigationdrawer.R;
+import info.androidhive.navigationdrawer.activity.MainActivity;
 
 /**
  * Created by AndroidBash on 09/05/2016.
@@ -96,7 +98,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             switch (menuItem.getItemId()) {
                 case R.id.action_favourite:
                     Toast.makeText(context, movies.get(pos).getMovieName()+" is added to favourite", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,
+                            MainActivity.class);
+                    context.startActivity(intent);
                     return true;
+
                 case R.id.action_watch:
                     Toast.makeText(context, movies.get(pos).getMovieName()+" is added to watchlist", Toast.LENGTH_SHORT).show();
                     return true;

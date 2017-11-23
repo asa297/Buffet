@@ -35,6 +35,8 @@ import info.androidhive.navigationdrawer.app.AppController;
 import info.androidhive.navigationdrawer.promotion.Movie;
 import info.androidhive.navigationdrawer.promotion.MoviesAdapter;
 
+import static info.androidhive.navigationdrawer.app.AppConfig.URL_BUFFET_TYPE;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -112,14 +114,9 @@ public class PromotionFragment extends Fragment {
         // Inflate the layout for this fragment
 
         movies = new ArrayList<>();
-
-
+        
         gridLayout = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(gridLayout);
-
-
-
-
 
         //set Array for spinner
         selected_array.add("ราคา");
@@ -136,7 +133,7 @@ public class PromotionFragment extends Fragment {
                 click = position;
 
                 if(click == 0){
-                    getprice_type();
+                    getdata_spinner_value(AppConfig.URL_PRICE_TYPE);
                     spin_value.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
@@ -150,7 +147,7 @@ public class PromotionFragment extends Fragment {
                     });
                 }
                 if(click == 1){
-                    getbuffet_type();
+                    getdata_spinner_value(URL_BUFFET_TYPE);
                     spin_value.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
@@ -276,12 +273,13 @@ public class PromotionFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_pro);
     }
 
-    private void getbuffet_type() {
+    private void getdata_spinner_value(final String URL) {
         // Tag used to cancel the request
         String tag_string_pro = "buffet tag";
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_BUFFET_TYPE, new Response.Listener<String>() {
+                URL, new Response.Listener<String>() {
+
 
             @Override
             public void onResponse(String response) {
@@ -295,7 +293,7 @@ public class PromotionFragment extends Fragment {
 
                         JSONObject object = array.getJSONObject(i);
                         //Log.d(TAG,"title = " + object.getString("title") + " rating = " + object.getString("rating") + " img = " + object.getString("image"));
-                        value_array.add(object.getString("type_name"));
+                        value_array.add(object.getString("type_name") );
 
                     }
                     ArrayAdapter<String> adapterarray = new ArrayAdapter<String>(getContext(),
@@ -322,49 +320,4 @@ public class PromotionFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_pro);
     }
 
-    private void getprice_type() {
-        // Tag used to cancel the request
-        String tag_string_pro = "buffet tag";
-
-        StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_PRICE_TYPE, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-
-
-                try {
-
-                    JSONArray array = new JSONArray(response.toString());
-                    value_array.clear();
-                    for (int i = 0; i < array.length(); i++) {
-
-                        JSONObject object = array.getJSONObject(i);
-                        //Log.d(TAG,"title = " + object.getString("title") + " rating = " + object.getString("rating") + " img = " + object.getString("image"));
-                        value_array.add(object.getString("price"));
-
-                    }
-                    ArrayAdapter<String> adapterarray = new ArrayAdapter<String>(getContext(),
-                    android.R.layout.simple_dropdown_item_1line, value_array);
-                    spin_value.setAdapter(adapterarray);
-                    adapterarray.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Profile Error: " + error.getMessage());
-                Toast.makeText(getContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_pro);
-    }
 }
